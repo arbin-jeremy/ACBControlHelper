@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Org.BouncyCastle.Crypto.Tls;
+using Report.CsvRelated;
 using Report.ExcelRelated.ExcelBuilder;
 using Report.Models;
 using Report.Util;
@@ -30,9 +31,12 @@ namespace Report.ExcelRelated.ExcelBuilder.Tests
 
 
         [TestMethod()]
-        public void SaveToPdfTest()
+        public void SaveToExcelTest()
         {
-            CertificateExcelReport certificate = new CertificateExcelReport();
+            CSVInput input = new CSVInput(@"C:\Users\junyu\Downloads\Current2_Adc_Range200_202403150110.csv");
+            CSVInput input2 = new CSVInput(@"C:\Users\junyu\Downloads\Current2_Adc_Range200_202403150110.csv");
+            CertificateDataSet set= input.GetDataSets(input2.ACBValues);
+              CertificateExcelReport certificate = new CertificateExcelReport();
             List<CertificateDataSet> dataSets = new List<CertificateDataSet>();   
             List<CertificateDataPoint> points= new List<CertificateDataPoint>();
             for (int i = 0; i < 6; i++)
@@ -41,14 +45,14 @@ namespace Report.ExcelRelated.ExcelBuilder.Tests
             }
             for (int i = 0; i < 6; i++)
             {
-                CertificateDataSet set = new CertificateDataSet();
-                set.Points.AddRange(points);
+                //CertificateDataSet set = new CertificateDataSet();
+                //set.Points.AddRange(points);
                 dataSets.Add(set);
             }
             certificate.DataSetInitial.AddRange(dataSets);
             certificate.DataSetAnnual.AddRange(dataSets);
-            string filePath = $"{AppDomain.CurrentDomain.BaseDirectory}test2.pdf";
-            certificate.SaveToPdf( filePath);
+            string filePath = $"{AppDomain.CurrentDomain.BaseDirectory}test2.xlsx";
+            certificate.SaveToExcel(filePath);
             Helper.OpenFile(filePath);
         }
 

@@ -33,7 +33,7 @@ namespace Report.ExcelRelated.ExcelBuilder
         public string Customer;
 
         //page2
-        public string CalibrationEngineerName;
+        public string CalibrationEngineerName="Junyu Lu";
 
         public string CalibrationEngineerFull
         {
@@ -43,7 +43,7 @@ namespace Report.ExcelRelated.ExcelBuilder
             }
         }
 
-        public string QcAprovalEngineerName;
+        public string QcAprovalEngineerName="Sarah Teague";
 
         public string QcApprovalEngineerFull
         {
