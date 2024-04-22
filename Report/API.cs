@@ -26,7 +26,7 @@ namespace Report
             GenerateCertificate(main, asFound,sn);
         }
 
-        public static void GenerateCertificate(List<string> mainCsvPaths, List<string> verifCsvPaths,string sn="")
+        public static void GenerateCertificate(List<string> mainCsvPaths, List<string> verifCsvPaths,string customer="",string sn="")
         {
             if (sn == "")
             {
@@ -51,15 +51,39 @@ namespace Report
                 }
                 dataSets.Add(dataSet);
             }
-            certificate.DataSetInitial.AddRange(dataSets);
+            certificate.Customer = customer;
+            certificate.DataSetInitial.AddRange(dataSets);//change later
             certificate.DataSetAnnual.AddRange(dataSets);
             certificate.SerialNumber = sn;
-
+            certificate.DateOfCalibration = GetCalibrationDate(mainCsvInputs);
+            certificate.Description = GetAllRanges(mainCsvInputs);
             string filePath = $"{AppDomain.CurrentDomain.BaseDirectory}test2.xlsx";
             certificate.SaveToExcel(filePath);
             Helper.OpenFile(filePath);
 
         }
+
+        private static string GetAllRanges(Dictionary<string, CSVInput> csvInputs)
+        {
+            StringBuilder voltage = new StringBuilder("Voltage Range\n ");
+            StringBuilder current = new StringBuilder("\nCurrent Range ");
+            foreach (var input in csvInputs)
+            {
+                var csvInput = input.Value;
+                if (csvInput.RangeType == "Voltage")
+                {
+                    voltage.Append(csvInput.RangeString + "/");
+                }
+                else//current
+                {
+                    current.Append(csvInput.RangeString + "/");
+                }
+            }
+            voltage.Remove(voltage.Length - 1, 1);
+            current.Remove(current.Length - 1, 1);
+            return voltage.Append(current).ToString();
+        }
+
 
         private static string GetSNFromPath(string path)
         {
@@ -78,12 +102,12 @@ namespace Report
             return result;
         }
 
-        private static DateTime GetCalibrationDate(List<CSVInput> csvInputs)
+        private static DateTime GetCalibrationDate(Dictionary<string,CSVInput> csvInputs)
         {
             DateTime latest= DateTime.MinValue;
             foreach(var input in csvInputs)
             {
-                DateTime date = ExtractDate(input.CalibrationTime);
+                DateTime date = ExtractDate(input.Value.CalibrationTime);
                 latest = GetLatestDateTime(latest, date);
             }
             return latest;

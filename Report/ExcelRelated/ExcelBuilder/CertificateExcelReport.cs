@@ -21,14 +21,19 @@ namespace Report.ExcelRelated.ExcelBuilder
         public string CertificateNumberCellValue => $"Certificate Number: {CertificateNumber}";
 
         //page1
-        public string ModelNumber;//e.g. OCA425554
+        public string ModelNumber="ACB";//e.g. OCA425554
         public string SerialNumber;//e.g. 215183-X2
         public string Description;
 
-        public DateTime CertificateIssueDate;
         public DateTime DateOfCalibration=DateTime.Today;
-        public string CalibrationInterval;//e.g. 12MONTHS
-        public DateTime CalibrationDueDate;
+        public string CalibrationInterval="12 MONTHS";//e.g. 12MONTHS
+        public DateTime CalibrationDueDate
+        {
+            get
+            {
+                return DateOfCalibration.AddYears(1);
+            }
+        }
 
         public string Customer;
 
@@ -54,9 +59,9 @@ namespace Report.ExcelRelated.ExcelBuilder
         }
 
         //page3
-        public string[] CalDates = new string[4];
+        public string[] CalDates = new string[4]; //not used
 
-        public string[] CalDueDates = new string[4];
+        public string[] CalDueDates = new string[4];//not used
 
         //page4
         public bool IsAnnual;
@@ -97,7 +102,7 @@ namespace Report.ExcelRelated.ExcelBuilder
         private void LoadPageGlobalDictionary()
         {
             LocationValuePairs = new Dictionary<string, string>();
-            LoadEntryToDictionary("C5", CertificateNumberCellValue);
+            LoadEntryToDictionary("A6", CertificateNumberCellValue);
         }
 
         private void LoadPage1Data(ExcelWorksheet page1)
@@ -112,7 +117,6 @@ namespace Report.ExcelRelated.ExcelBuilder
             LoadEntryToDictionary("F11", ModelNumber);
             LoadEntryToDictionary("F13", SerialNumber);
             LoadEntryToDictionary("F17", Description);
-            LoadEntryToDictionary("F24", CertificateIssueDate);
             LoadEntryToDictionary("F26", DateOfCalibration);
             LoadEntryToDictionary("F28", CalibrationInterval);
             LoadEntryToDictionary("F30", CalibrationDueDate);
@@ -141,11 +145,11 @@ namespace Report.ExcelRelated.ExcelBuilder
         private void LoadPage3Dictionary()
         {
             LoadPageGlobalDictionary();
-            for (int i = 0; i < 4; i++)
-            {
-                LoadEntryToDictionary($"L{15 + i*2}", CalDates[i]);
-                LoadEntryToDictionary($"N{15 + i*2}", CalDueDates[i]);
-            }
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    LoadEntryToDictionary($"L{15 + i*2}", CalDates[i]);
+            //    LoadEntryToDictionary($"N{15 + i*2}", CalDueDates[i]);
+            //}
         }
 
 

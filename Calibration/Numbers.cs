@@ -194,5 +194,38 @@ namespace Calibration
             Helper.Log($"ACB Range {acbRange}V is not available");
             return NOT_AVAILABLE;
         }
+
+        public static string GetUncertaintiyString(string input)
+        {
+            switch (input)
+            {
+                case "100V":
+                    return "2.063mV";
+                case "10V":
+                    return "151.5uV";
+                case "200A":
+                    return "3.862mA";
+                case "60A":
+                    return "3.862mA";
+                case "10A":
+                    return "0.386mA";
+                case "1A":
+                    return "62uA";
+                case "0.5A":
+                    return "62uA";
+                case "0.2A":
+                    return "62uA";
+                case "0.02A":
+                    return "16uA";  
+
+                case "0.002A":
+                    return "60nA";
+                case "0.001A":
+                    return "60nA";
+                case "0.0001A":
+                    return "8.39nA";    
+            }
+            return "N/A";
+        }
     }
 }

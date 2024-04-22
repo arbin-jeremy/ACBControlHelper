@@ -1,4 +1,5 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿using Calibration;
+using Microsoft.Office.Interop.Excel;
 using Report.Models;
 using Report.Util;
 using System;
@@ -77,7 +78,7 @@ namespace Report.CsvRelated
         {
             for(int i=row;i<row+_PointCount;i++)
             {
-                values.Add(_Content[i][1]);
+                values.Add(_Content[i][col]);
             }
         }
 
@@ -93,6 +94,7 @@ namespace Report.CsvRelated
                 point.LowerLimit = Double.Parse(LowerLimitValues[i]);
                 point.Nominal = Double.Parse(NominalValues[i]);
                 point.AsLeft = Double.Parse(ACBValues[i]);
+                point.Uncertainty = Numbers.GetUncertaintiyString(RangeString);
                 if (acbValues != null)
                 {
                     point.AsFound = Double.Parse(acbValues[i]);
