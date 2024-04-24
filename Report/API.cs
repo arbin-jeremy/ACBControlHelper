@@ -87,8 +87,7 @@ namespace Report
 
         private static string GetSNFromPath(string path)
         {
-            string[] splitted = path.Split('\\');
-            return splitted[splitted.Length - 1];
+            return Helper.FindConsecutiveDigits(path);
         }
 
         private static Dictionary<string,CSVInput> GetCsvInputDict(List<string> csvPaths)

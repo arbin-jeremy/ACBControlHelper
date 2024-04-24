@@ -36,9 +36,9 @@
             // 
             // Button_BrowseFolder
             // 
-            Button_BrowseFolder.Location = new Point(296, 55);
+            Button_BrowseFolder.Location = new Point(335, 29);
             Button_BrowseFolder.Name = "Button_BrowseFolder";
-            Button_BrowseFolder.Size = new Size(48, 20);
+            Button_BrowseFolder.Size = new Size(132, 58);
             Button_BrowseFolder.TabIndex = 9;
             Button_BrowseFolder.Text = "...";
             Button_BrowseFolder.UseVisualStyleBackColor = true;
@@ -55,9 +55,9 @@
             // 
             // TextBox_Path
             // 
-            TextBox_Path.Location = new Point(85, 81);
+            TextBox_Path.Location = new Point(3, 93);
             TextBox_Path.Name = "TextBox_Path";
-            TextBox_Path.Size = new Size(381, 23);
+            TextBox_Path.Size = new Size(626, 23);
             TextBox_Path.TabIndex = 7;
             TextBox_Path.TextChanged += textBox1_TextChanged;
             // 

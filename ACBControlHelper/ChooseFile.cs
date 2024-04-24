@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Report;
+using Report.Util;
 
 namespace ACBControlHelper
 {
     public partial class ChooseFile : UserControl
     {
+
+        Form1 Parent;
         private string _FolderPath
         {
             get
@@ -21,9 +24,10 @@ namespace ACBControlHelper
             }
         }
 
-        public ChooseFile()
+        public ChooseFile(Form1 parentForm)
         {
             InitializeComponent();
+            Parent = parentForm;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -33,35 +37,52 @@ namespace ACBControlHelper
             int i = 0;
             foreach (var fullName in fileList)
             {
-                string fileName=Path.GetFileName(fullName);
+                string fileName = Path.GetFileName(fullName);
                 CheckedListBox_Files.Items.Add(fileName);
                 CheckedListBox_Files.SetItemChecked(i++, true);
             }
+            Parent.FillTextBoxWithSN(Helper.FindConsecutiveDigits(_FolderPath) + "-X");
+
         }
 
         public List<string> GetSelectedCsvFiles()
         {
             List<string> result = new();
-            foreach(int index in CheckedListBox_Files.CheckedIndices)
+            foreach (int index in CheckedListBox_Files.CheckedIndices)
             {
                 string fileName = CheckedListBox_Files.Items[index].ToString();
-                result.Add(Path.Combine(_FolderPath, fileName));    
+                result.Add(Path.Combine(_FolderPath, fileName));
             }
             return result;
         }
+
         private void Button_BrowseFolder_Click(object sender, EventArgs e)
         {
-            using (var folderDialog = new FolderBrowserDialog())
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                folderDialog.Description = "Select a folder";
+                openFileDialog.ValidateNames = false;
+                openFileDialog.CheckFileExists = false;
+                openFileDialog.CheckPathExists = true;
+                openFileDialog.FileName = "Select Folder"; // This text will appear in the filename box to guide the user.
+                openFileDialog.Filter = "All files (*.*)|*.*"; // This will show all files in the dialog.
+                openFileDialog.Title = "Select a folder";
 
-                DialogResult result = folderDialog.ShowDialog();
-
-                if (result == DialogResult.OK)
+                DialogResult result = openFileDialog.ShowDialog();
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(openFileDialog.FileName))
                 {
-                    TextBox_Path.Text = folderDialog.SelectedPath;
+                    // Return the directory path
+                    TextBox_Path.Text = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
                 }
             }
+            //using (var folderDialog = new FolderBrowserDialog())
+            //{
+            //    DialogResult result = folderDialog.ShowDialog();
+            //    if (result == DialogResult.OK)
+            //    {
+            //        TextBox_Path.Text = folderDialog.SelectedPath;
+            //    }
+            //}
         }
+
     }
 }

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             ButtonCertificate = new Button();
-            SelectCsvs_Main = new ChooseFile();
-            SelectCsvs_Verfication = new ChooseFile();
+            SelectCsvs_Main = new ChooseFile(this);
+            SelectCsvs_Verfication = new ChooseFile(this);
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();

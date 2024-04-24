@@ -31,26 +31,13 @@ namespace ACBControlHelper
         {
             List<string> mainCsvFiles = SelectCsvs_Main.GetSelectedCsvFiles();
             List<string> verificationCsvFiles = SelectCsvs_Verfication.GetSelectedCsvFiles();
-
+            
             API.GenerateCertificate(mainCsvFiles, verificationCsvFiles, _Customer, _SN);
         }
-
-        static string FindConsecutiveDigits(string input)
+        
+        public void FillTextBoxWithSN(string sn)
         {
-            // Regular expression to find a sequence of 6 digits
-            Regex regex = new Regex(@"\d{6}");
-
-            // Find the first match
-            Match match = regex.Match(input);
-
-            // If a match is found, return it
-            if (match.Success)
-            {
-                return match.Value;
-            }
-
-            // If no match is found, return an empty string
-            return string.Empty;
+            TextBox_SN.Text = sn;
         }
     }
 }

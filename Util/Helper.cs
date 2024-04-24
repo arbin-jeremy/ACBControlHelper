@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Report.Util
@@ -55,6 +56,24 @@ namespace Report.Util
 
             // Convert the list to a 2D array
             return rows.ToArray();
+        }
+
+        public static string FindConsecutiveDigits(string input)
+        {
+            // Regular expression to find a sequence of 6 digits
+            Regex regex = new Regex(@"\d{6}");
+
+            // Find the first match
+            Match match = regex.Match(input);
+
+            // If a match is found, return it
+            if (match.Success)
+            {
+                return match.Value;
+            }
+
+            // If no match is found, return an empty string
+            return string.Empty;
         }
     }
 }
