@@ -57,7 +57,7 @@ namespace Report
             certificate.SerialNumber = sn;
             certificate.DateOfCalibration = GetCalibrationDate(mainCsvInputs);
             certificate.Description = GetAllRanges(mainCsvInputs);
-            string filePath = $"{AppDomain.CurrentDomain.BaseDirectory}test2.xlsx";
+            string filePath = $"{AppDomain.CurrentDomain.BaseDirectory}Certificate_{sn}.xlsx";
             certificate.SaveToExcel(filePath);
             Helper.OpenFile(filePath);
 

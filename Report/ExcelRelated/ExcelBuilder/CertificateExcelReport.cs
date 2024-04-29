@@ -48,7 +48,7 @@ namespace Report.ExcelRelated.ExcelBuilder
             }
         }
 
-        public string QcAprovalEngineerName="Sarah Teague";
+        public string QcAprovalEngineerName="Larry Pan";
 
         public string QcApprovalEngineerFull
         {

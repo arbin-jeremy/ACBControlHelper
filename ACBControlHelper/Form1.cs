@@ -15,7 +15,7 @@ namespace ACBControlHelper
         {
             get
             {
-                return RichTextBox_Customer.Text.Replace("\v","\n");
+                return RichTextBox_Customer.Text.Replace("\v", "\n");
             }
         }
 
@@ -31,13 +31,18 @@ namespace ACBControlHelper
         {
             List<string> mainCsvFiles = SelectCsvs_Main.GetSelectedCsvFiles();
             List<string> verificationCsvFiles = SelectCsvs_Verfication.GetSelectedCsvFiles();
-            
+
             API.GenerateCertificate(mainCsvFiles, verificationCsvFiles, _Customer, _SN);
         }
-        
+
         public void FillTextBoxWithSN(string sn)
         {
             TextBox_SN.Text = sn;
+        }
+        private void HandleEvent(object sender, MyEventArgs e)
+        {
+            TextBox_SN.Text = e.Message;
+
         }
     }
 }

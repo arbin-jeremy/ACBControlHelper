@@ -47,7 +47,7 @@ namespace Report.ExcelRelated.ExcelBuilder
                 i++;
             }
             SaveToExcel(temp);
-            ExcelHelper.SaveExcelFileToPdf(temp, pdfFilePath);
+            //ExcelHelper.SaveExcelFileToPdf(temp, pdfFilePath);
             Helper.Log($"{pdfFilePath} is successfully generated!");
         }
 
