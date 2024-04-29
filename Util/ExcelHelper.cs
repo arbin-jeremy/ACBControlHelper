@@ -23,7 +23,7 @@ namespace Report.ExcelRelated
             {
                 Excel.Application s = new();
 
-                Excel.Workbook workbook = excelApp.get_Workbooks().Open(excelFilePath);
+                Excel.Workbook workbook = excelApp.Workbooks.Open(excelFilePath);
                 workbook.ExportAsFixedFormat(Excel.XlFixedFormatType.xlTypePDF, pdfFilePath);
                 workbook.Close(false);
             }
@@ -43,7 +43,7 @@ namespace Report.ExcelRelated
         {
             try
             {
-                GetWindowThreadProcessId(excelApp.get_Hwnd(), out int id);
+                GetWindowThreadProcessId(excelApp.Hwnd, out int id);
                 Process excelProcesses = Process.GetProcessById(id);
                 excelProcesses.Kill();
             }
