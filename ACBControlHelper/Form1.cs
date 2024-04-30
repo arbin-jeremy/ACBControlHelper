@@ -29,10 +29,17 @@ namespace ACBControlHelper
 
         private void ButtonCertificate_Click(object sender, EventArgs e)
         {
-            List<string> mainCsvFiles = SelectCsvs_Main.GetSelectedCsvFiles();
-            List<string> verificationCsvFiles = SelectCsvs_Verfication.GetSelectedCsvFiles();
+            try
+            {
+                List<string> mainCsvFiles = SelectCsvs_Main.GetSelectedCsvFiles();
+                List<string> verificationCsvFiles = SelectCsvs_Verfication.GetSelectedCsvFiles();
 
-            API.GenerateCertificate(mainCsvFiles, verificationCsvFiles, _Customer, _SN);
+                API.GenerateCertificate(mainCsvFiles, verificationCsvFiles, _Customer, _SN);
+
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void FillTextBoxWithSN(string sn)

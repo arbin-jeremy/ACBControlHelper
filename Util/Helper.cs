@@ -36,26 +36,34 @@ namespace Report.Util
 
         public static string[][] ReadCsvFile(string filePath)
         {
-            // List to hold row arrays
-            List<string[]> rows = new List<string[]>();
-
-            // Read all lines from the file
-            string[] lines = File.ReadAllLines(filePath);
-
-            // Process each line
-            foreach (string line in lines)
+            try
             {
-                // Split the line into parts based on commas
-                // This assumes that your CSV file does not have quoted fields that can contain commas.
-                // If it does, consider using a more robust CSV parsing library
-                string[] parts = line.Split(',');
+                // List to hold row arrays
+                List<string[]> rows = new List<string[]>();
 
-                // Add the parts array to the rows list
-                rows.Add(parts);
+                // Read all lines from the file
+                string[] lines = File.ReadAllLines(filePath);
+
+                // Process each line
+                foreach (string line in lines)
+                {
+                    // Split the line into parts based on commas
+                    // This assumes that your CSV file does not have quoted fields that can contain commas.
+                    // If it does, consider using a more robust CSV parsing library
+                    string[] parts = line.Split(',');
+
+                    // Add the parts array to the rows list
+                    rows.Add(parts);
+                }
+
+                // Convert the list to a 2D array
+                return rows.ToArray();
             }
-
-            // Convert the list to a 2D array
-            return rows.ToArray();
+            catch(Exception ex)
+            {
+                Helper.Log(ex.Message);
+                return null;
+            }
         }
 
         public static string FindConsecutiveDigits(string input)

@@ -59,6 +59,7 @@ namespace Report
             certificate.Description = GetAllRanges(mainCsvInputs);
             string filePath = $"{AppDomain.CurrentDomain.BaseDirectory}Certificate_{sn}.xlsx";
             certificate.SaveToExcel(filePath);
+            
             Helper.OpenFile(filePath);
 
         }
