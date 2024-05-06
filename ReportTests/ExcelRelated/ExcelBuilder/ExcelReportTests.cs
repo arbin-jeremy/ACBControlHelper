@@ -35,7 +35,7 @@ namespace Report.ExcelRelated.ExcelBuilder.Tests
         {
             CSVInput input = new CSVInput(@"C:\Users\junyu\Downloads\Current2_Adc_Range200_202403150110.csv");
             CSVInput input2 = new CSVInput(@"C:\Users\junyu\Downloads\Current2_Adc_Range200_202403150110.csv");
-            CertificateDataSet set= input.GetDataSets(input2.ACBValues);
+            CertificateDataSet set= input.GetDataSet(true);
               CertificateExcelReport certificate = new CertificateExcelReport();
             List<CertificateDataSet> dataSets = new List<CertificateDataSet>();   
             List<CertificateDataPoint> points= new List<CertificateDataPoint>();
@@ -49,8 +49,8 @@ namespace Report.ExcelRelated.ExcelBuilder.Tests
                 //set.Points.AddRange(points);
                 dataSets.Add(set);
             }
-            certificate.DataSetInitial.AddRange(dataSets);
-            certificate.DataSetAnnual.AddRange(dataSets);
+            certificate.DataSetAsLeft.AddRange(dataSets);
+            certificate.DataSetAsFound.AddRange(dataSets);
             string filePath = $"{AppDomain.CurrentDomain.BaseDirectory}test2.xlsx";
             certificate.SaveToExcel(filePath);
             Helper.OpenFile(filePath);

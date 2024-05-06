@@ -1,10 +1,12 @@
 ﻿using Org.BouncyCastle.Crypto.Tls;
+using Org.BouncyCastle.Ocsp;
 using Report.CsvRelated;
 using Report.ExcelRelated.ExcelBuilder;
 using Report.Models;
 using Report.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,32 +38,30 @@ namespace Report
             var mainCsvInputs= GetCsvInputDict(mainCsvPaths);
             var verifCsvInputs= GetCsvInputDict(verifCsvPaths);
             CertificateExcelReport certificate = new CertificateExcelReport();
-            List<CertificateDataSet> dataSets = new List<CertificateDataSet>();
-            foreach (var r in mainCsvInputs.Keys)
-            {
-                CSVInput main = mainCsvInputs[r];
-                CertificateDataSet dataSet;
-                if (verifCsvInputs.ContainsKey(r))
-                {
-                    dataSet=main.GetDataSets(verifCsvInputs[r]);
-                }
-                else
-                {
-                    dataSet = main.GetDataSets();
-                }
-                dataSets.Add(dataSet);
-            }
+            var main=GetSets(mainCsvInputs,false);
+            var veri=GetSets(verifCsvInputs,true);
             certificate.Customer = customer;
-            certificate.DataSetInitial.AddRange(dataSets);//change later
-            certificate.DataSetAnnual.AddRange(dataSets);
+            certificate.DataSetAsLeft.AddRange(main);//change later
+            certificate.DataSetAsFound.AddRange(veri);
             certificate.SerialNumber = sn;
             certificate.DateOfCalibration = GetCalibrationDate(mainCsvInputs);
             certificate.Description = GetAllRanges(mainCsvInputs);
-            string filePath = $"{AppDomain.CurrentDomain.BaseDirectory}Certificate_{sn}.xlsx";
+            string filePath = $"{AppDomain.CurrentDomain.BaseDirectory}Certificate_{sn}_{DateTime.Now.ToString("yyyyMMdd-HHmmss")}.xlsx";
             certificate.SaveToExcel(filePath);
             
             Helper.OpenFile(filePath);
 
+        }
+
+        private static List<CertificateDataSet> GetSets(Dictionary<string,CSVInput> CsvInputs,bool asFound)
+        {
+            var result = new List<CertificateDataSet>();
+            foreach (var r in CsvInputs.Keys)
+            {
+                CSVInput input = CsvInputs[r];
+                result.Add(input.GetDataSet(asFound));
+            }
+            return result;
         }
 
         private static string GetAllRanges(Dictionary<string, CSVInput> csvInputs)

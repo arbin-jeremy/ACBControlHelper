@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Report;
+using Report.Util;
 
 namespace ACBControlHelper
 {
@@ -61,6 +62,7 @@ namespace ACBControlHelper
                 CheckedListBox_Files.Items.Add(fileName);
                 CheckedListBox_Files.SetItemChecked(i++, true);
             }
+            RaiseEvent(Helper.FindConsecutiveDigits(_FolderPath) + "-X");
             //Parent.FillTextBoxWithSN(Helper.FindConsecutiveDigits(_FolderPath) + "-X");
         }
 

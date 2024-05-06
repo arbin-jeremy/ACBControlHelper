@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -34,7 +35,7 @@ namespace Report.Util
             }
         }
 
-        public static string[][] ReadCsvFile(string filePath)
+        public static string[][] ReadCsvFileOLD(string filePath)
         {
             try
             {
@@ -66,7 +67,47 @@ namespace Report.Util
             }
         }
 
-        public static string FindConsecutiveDigits(string input)
+
+
+public static string[][] ReadCsvFile(string filePath)
+    {
+        try
+        {
+            // List to hold row arrays
+            List<string[]> rows = new List<string[]>();
+
+            // Open the CSV file using FileStream with FileShare.ReadWrite option
+            using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var streamReader = new StreamReader(fs))
+            {
+                // Read each line from the file
+                while (!streamReader.EndOfStream)
+                {
+                    string line = streamReader.ReadLine();
+
+                    // Split the line into parts based on commas
+                    // This assumes that your CSV file does not have quoted fields that can contain commas.
+                    // If it does, consider using a more robust CSV parsing library
+                    string[] parts = line.Split(',');
+
+                    // Add the parts array to the rows list
+                    rows.Add(parts);
+                }
+            }
+
+            // Convert the list to a 2D array
+            return rows.ToArray();
+        }
+        catch (Exception ex)
+        {
+            Helper.Log(ex.Message);
+            return null;
+        }
+    }
+
+
+
+    public static string FindConsecutiveDigits(string input)
         {
             // Regular expression to find a sequence of 6 digits
             Regex regex = new Regex(@"\d{6}");

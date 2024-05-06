@@ -63,24 +63,21 @@ namespace Report.ExcelRelated.ExcelBuilder
 
         public string[] CalDueDates = new string[4];//not used
 
-        //page4
-        public bool IsAnnual;
-
-        public List<CertificateDataSet> DataSetAnnual = new List<CertificateDataSet>();
+        public List<CertificateDataSet> DataSetAsFound = new List<CertificateDataSet>();
 
         //page5
-        public List<CertificateDataSet> DataSetInitial = new List<CertificateDataSet>();
+        public List<CertificateDataSet> DataSetAsLeft = new List<CertificateDataSet>();
 
         protected override void ReplaceWithData(ExcelWorkbook book)
         {
             LoadPage1Data(book.Worksheets[0]);
             LoadPage2Data(book.Worksheets[1]);
             LoadPage3Data(book.Worksheets[2]);
-            if (IsAnnual)
+            if (DataSetAsFound.Count>0)
             {
-                LoadDatasets(DataSetAnnual, book);
+                LoadDatasets(DataSetAsFound, book);
             }
-            LoadDatasets(DataSetInitial, book);
+            LoadDatasets(DataSetAsLeft, book);
             book.Worksheets.Delete(3);
         }
 

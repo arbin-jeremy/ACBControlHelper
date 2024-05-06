@@ -36,7 +36,8 @@ namespace ACBControlHelper
 
                 API.GenerateCertificate(mainCsvFiles, verificationCsvFiles, _Customer, _SN);
 
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -50,6 +51,11 @@ namespace ACBControlHelper
         {
             TextBox_SN.Text = e.Message;
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            SelectCsvs_Main.FolderPathChanged += HandleEvent;
         }
     }
 }

@@ -51,16 +51,16 @@
             // 
             // SelectCsvs_Main
             // 
-            SelectCsvs_Main.Location = new Point(-67, 31);
+            SelectCsvs_Main.Location = new Point(0, 36);
             SelectCsvs_Main.Name = "SelectCsvs_Main";
-            SelectCsvs_Main.Size = new Size(503, 519);
+            SelectCsvs_Main.Size = new Size(661, 519);
             SelectCsvs_Main.TabIndex = 1;
             // 
             // SelectCsvs_Verfication
             // 
-            SelectCsvs_Verfication.Location = new Point(442, 31);
+            SelectCsvs_Verfication.Location = new Point(632, 36);
             SelectCsvs_Verfication.Name = "SelectCsvs_Verfication";
-            SelectCsvs_Verfication.Size = new Size(503, 519);
+            SelectCsvs_Verfication.Size = new Size(657, 519);
             SelectCsvs_Verfication.TabIndex = 2;
             // 
             // label1
@@ -118,7 +118,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(942, 608);
+            ClientSize = new Size(1295, 608);
             Controls.Add(label4);
             Controls.Add(TextBox_SN);
             Controls.Add(RichTextBox_Customer);
@@ -130,6 +130,7 @@
             Controls.Add(ButtonCertificate);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }

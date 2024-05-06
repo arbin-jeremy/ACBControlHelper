@@ -82,7 +82,7 @@ namespace Report.CsvRelated
             }
         }
 
-        public CertificateDataSet GetDataSets(List<string> acbValues=null)
+        public CertificateDataSet GetDataSet(bool asFound)
         {
             var result= new CertificateDataSet();
             result.ParameterTested = RangeType;
@@ -93,11 +93,14 @@ namespace Report.CsvRelated
                 point.UpperLimit =Double.Parse(UpperLimitValues[i]);
                 point.LowerLimit = Double.Parse(LowerLimitValues[i]);
                 point.Nominal = Double.Parse(NominalValues[i]);
-                point.AsLeft = Double.Parse(ACBValues[i]);
                 point.Uncertainty = Numbers.GetUncertaintiyString(RangeString);
-                if (acbValues != null)
+                if (asFound)
                 {
-                    point.AsFound = Double.Parse(acbValues[i]);
+                    point.AsFound = Double.Parse(ACBValues[i]);
+                }
+                else
+                {
+                    point.AsLeft = Double.Parse(ACBValues[i]);
                 }
                 result.Points.Add(point);
             }
@@ -105,10 +108,6 @@ namespace Report.CsvRelated
             return result;
         }
 
-        public CertificateDataSet GetDataSets(CSVInput asFound)
-        {
-            return GetDataSets(asFound.ACBValues);
-        }
 
     }
 }
