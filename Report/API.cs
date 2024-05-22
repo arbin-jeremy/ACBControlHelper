@@ -30,11 +30,9 @@ namespace Report
 
         public static void GenerateCertificate(List<string> mainCsvPaths, List<string> verifCsvPaths,string customer="",string sn="")
         {
-            if (sn == "")
-            {
-                sn = GetSNFromPath(Path.GetDirectoryName(mainCsvPaths[0]));
-
-            }
+            string mainFolder = Path.GetDirectoryName(mainCsvPaths[0]);
+ 
+            
             var mainCsvInputs= GetCsvInputDict(mainCsvPaths);
             var verifCsvInputs= GetCsvInputDict(verifCsvPaths);
             CertificateExcelReport certificate = new CertificateExcelReport();
@@ -46,7 +44,7 @@ namespace Report
             certificate.SerialNumber = sn;
             certificate.DateOfCalibration = GetCalibrationDate(mainCsvInputs);
             certificate.Description = GetAllRanges(mainCsvInputs);
-            string filePath = $"{AppDomain.CurrentDomain.BaseDirectory}Certificate_{sn}_{DateTime.Now.ToString("yyyyMMdd-HHmmss")}.xlsx";
+            string filePath = $"{Path.GetDirectoryName(mainCsvPaths[0])}\\Certificate_{sn}_{DateTime.Now.ToString("yyyyMMdd-HHmmss")}.xlsx";
             certificate.SaveToExcel(filePath);
             
             Helper.OpenFile(filePath);
@@ -90,6 +88,8 @@ namespace Report
         {
             return Helper.FindConsecutiveDigits(path);
         }
+
+   
 
         private static Dictionary<string,CSVInput> GetCsvInputDict(List<string> csvPaths)
         {

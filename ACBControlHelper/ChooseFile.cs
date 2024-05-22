@@ -62,8 +62,28 @@ namespace ACBControlHelper
                 CheckedListBox_Files.Items.Add(fileName);
                 CheckedListBox_Files.SetItemChecked(i++, true);
             }
-            RaiseEvent(Helper.FindConsecutiveDigits(_FolderPath) + "-X");
+
+            ArrangeCheckListBox();
+
+            RaiseEvent(GetLastFolderName(_FolderPath));
             //Parent.FillTextBoxWithSN(Helper.FindConsecutiveDigits(_FolderPath) + "-X");
+        }
+
+
+        //Dominic
+        private void ArrangeCheckListBox()
+        {
+
+        }
+        //
+
+        private static string GetLastFolderName(string path)
+        {
+            // Normalize the path
+            string normalizedPath = Path.GetFullPath(path).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+
+            // Get the last folder name
+            return Path.GetFileName(normalizedPath);
         }
 
         public List<string> GetSelectedCsvFiles()
