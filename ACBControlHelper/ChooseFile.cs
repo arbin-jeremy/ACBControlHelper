@@ -125,8 +125,19 @@ namespace ACBControlHelper
             // Normalize the path
             string normalizedPath = Path.GetFullPath(path).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 
-            // Get the last folder name
-            return Path.GetFileName(normalizedPath);
+            
+            return GetSerialNumber(normalizedPath);
+            
+        }
+        private static string GetSerialNumber(string folderPath)
+        {
+            string[] parts = folderPath.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar); 
+            string[] filteredParts = parts.Where(part => 
+            !part.Equals("Data", StringComparison.OrdinalIgnoreCase) &&
+            !part.StartsWith("ACB", StringComparison.OrdinalIgnoreCase) 
+            ).ToArray();
+
+            return filteredParts.Last(); 
         }
 
         public List<string> GetSelectedCsvFiles()
