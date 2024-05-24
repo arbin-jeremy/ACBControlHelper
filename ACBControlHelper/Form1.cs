@@ -51,9 +51,7 @@ namespace ACBControlHelper
 
         private void HandleEvent(object sender, MyEventArgs e)
         {
-            TextBox_SN.Text = e.Message;
-            //RichTextBox_Customer.Text = arbin_production;
-         
+            TextBox_SN.Text = e.Message;         
         }
 
         private bool ContainsSixConsecutiveDigits(string str)
