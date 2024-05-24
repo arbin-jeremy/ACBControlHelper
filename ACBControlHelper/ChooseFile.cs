@@ -169,13 +169,31 @@ namespace ACBControlHelper
             //        TextBox_Path.Text = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
             //    }
             //}
-            using (var folderDialog = new FolderBrowserDialog())
+
+            // previsous code 
+            /*using (var folderDialog = new FolderBrowserDialog())
             {
-                DialogResult result = folderDialog.ShowDialog();
-                if (result == DialogResult.OK)
+               DialogResult result = folderDialog.ShowDialog();
+               if (result == DialogResult.OK)
+               {
+                   TextBox_Path.Text = folderDialog.SelectedPath;
+               }
+            }*/ 
+
+            using(OpenFileDialog openFileDialog = new OpenFileDialog { 
+                ValidateNames = false,
+                CheckFileExists = false,
+                CheckPathExists = true,
+                FileName = "Select Folder"
+            })
+            {
+                //openFileDialog.Filter = "CSV files (*.csv)|*.csv";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    TextBox_Path.Text = folderDialog.SelectedPath;
+                    TextBox_Path.Text = Path.GetDirectoryName(openFileDialog.FileName);
+                    // RichTextBox_Customer.Text = "GetSerialNumber(TextBox_Path.Text)"; 
                 }
+
             }
         }
     }
