@@ -47,15 +47,49 @@ namespace ACBControlHelper
         {
             TextBox_SN.Text = sn;
         }
+
+
         private void HandleEvent(object sender, MyEventArgs e)
         {
             TextBox_SN.Text = e.Message;
-
+            //RichTextBox_Customer.Text = arbin_production;
+         
         }
+
+        private bool ContainsSixConsecutiveDigits(string str)
+        {
+            return Regex.IsMatch(str, @"\d{6}");
+        }
+
+
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
             SelectCsvs_Main.FolderPathChanged += HandleEvent;
         }
+
+        public const string arbin_production = "Arbin Production";
+        public const string arbin_stock = "Arbin Stock";
+
+        private void TextBox_SN_TextChanged(object sender, EventArgs e)
+        {
+            string sn = TextBox_SN.Text;
+            if (sn.Length > 5 && sn.Contains("ACB"))
+            {
+                RichTextBox_Customer.Text = arbin_production;
+            }
+            else if (ContainsSixConsecutiveDigits(sn))
+            {
+                RichTextBox_Customer.Text = "";
+            }
+            else
+            {
+                RichTextBox_Customer.Text = arbin_stock;
+            }
+        }
+
+  
     }
 }

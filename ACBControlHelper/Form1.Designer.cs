@@ -41,7 +41,7 @@
             // 
             // ButtonCertificate
             // 
-            ButtonCertificate.Location = new Point(750, 555);
+            ButtonCertificate.Location = new Point(787, 545);
             ButtonCertificate.Name = "ButtonCertificate";
             ButtonCertificate.Size = new Size(128, 40);
             ButtonCertificate.TabIndex = 0;
@@ -51,14 +51,14 @@
             // 
             // SelectCsvs_Main
             // 
-            SelectCsvs_Main.Location = new Point(0, 36);
+            SelectCsvs_Main.Location = new Point(12, 30);
             SelectCsvs_Main.Name = "SelectCsvs_Main";
             SelectCsvs_Main.Size = new Size(661, 519);
             SelectCsvs_Main.TabIndex = 1;
             // 
             // SelectCsvs_Verfication
             // 
-            SelectCsvs_Verfication.Location = new Point(632, 36);
+            SelectCsvs_Verfication.Location = new Point(626, 30);
             SelectCsvs_Verfication.Name = "SelectCsvs_Verfication";
             SelectCsvs_Verfication.Size = new Size(657, 519);
             SelectCsvs_Verfication.TabIndex = 2;
@@ -104,6 +104,7 @@
             TextBox_SN.Name = "TextBox_SN";
             TextBox_SN.Size = new Size(100, 23);
             TextBox_SN.TabIndex = 7;
+            TextBox_SN.TextChanged += TextBox_SN_TextChanged;
             // 
             // label4
             // 
