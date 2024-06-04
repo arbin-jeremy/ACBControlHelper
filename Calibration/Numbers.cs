@@ -143,7 +143,7 @@ namespace Calibration
         }
 
         /// <summary>
-        /// Unit in A
+        /// Unit in A  NOT USED SINCE 6/4/2024
         /// </summary>
         /// <param name="acbRange"></param>
         /// <returns></returns>
@@ -179,7 +179,7 @@ namespace Calibration
         }
 
         /// <summary>
-        /// Unit in V
+        /// Unit in V  NOT USED SINCE 6/4/2024
         /// </summary>
         /// <param name="acbRange"></param>
         public static double GetVoltageUncertainty(double acbRange)
@@ -196,6 +196,41 @@ namespace Calibration
         }
 
         public static string GetUncertaintiyString(string input)
+        {
+            switch (input)
+            {
+                case "100V":
+                    return "1.1mV";
+                case "10V":
+                case "5V":
+                    return "76uV";
+                case "200A":
+                case "60A":
+                    return "1.9mA";
+                case "10A":
+                case "5A":
+                    return "0.19mA";
+                case "1A":
+                case "0.5A":
+                case "0.2A":
+                    return "31uA";
+                case "0.1A":
+                    return "8.2uA";
+                case "0.02A":
+                case "0.01A":
+                    return "0.32uA";
+                case "0.002A":
+                case "0.001A":
+                    return "30nA";
+                case "0.0001A":
+                    return "4.2nA";
+            }
+            return "N/A";
+        }
+
+
+        //not used since 6/4/2024
+        public static string GetUncertaintiyStringOld(string input)
         {
             switch (input)
             {
