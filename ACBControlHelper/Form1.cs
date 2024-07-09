@@ -76,15 +76,15 @@ namespace ACBControlHelper
             string sn = TextBox_SN.Text;
             if (sn.Length > 5 && sn.Contains("ACB"))
             {
-                RichTextBox_Customer.Text = arbin_production;
+               // RichTextBox_Customer.Text = arbin_production;
             }
             else if (ContainsSixConsecutiveDigits(sn))
             {
-                RichTextBox_Customer.Text = "";
+               // RichTextBox_Customer.Text = "";
             }
             else
             {
-                RichTextBox_Customer.Text = arbin_stock;
+               // RichTextBox_Customer.Text = arbin_stock;
             }
         }
 

@@ -212,9 +212,11 @@ namespace Calibration
                     return "0.19mA";
                 case "1A":
                 case "0.5A":
+                case "0.4A":
                 case "0.2A":
                     return "31uA";
                 case "0.1A":
+                case "0.05A":
                     return "8.2uA";
                 case "0.02A":
                 case "0.01A":

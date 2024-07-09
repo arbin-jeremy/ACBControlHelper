@@ -61,17 +61,17 @@ namespace Report.CsvRelated
 
         private void GetNominalValues() 
         {   
-            GetValues(21,1, NominalValues);
+            GetValues(14+_PointCount,1, NominalValues);
         }
 
         private void GetLowerLimitValues()
         {
-            GetValues(21, 2, LowerLimitValues);
+            GetValues(14 + _PointCount, 2, LowerLimitValues);
         }
 
         private void GetUpperLimitValues()
         {
-            GetValues(21, 3, UpperLimitValues);
+            GetValues(14 + _PointCount, 3, UpperLimitValues);
         }
 
         private void GetValues(int row, int col, List<string> values)
