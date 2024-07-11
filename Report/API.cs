@@ -15,7 +15,7 @@ namespace Report
 {
     public class API
     {
-
+        public static bool word = false;
 
         public static void GenerateCertificate(string mainFolderPath,string asFoundFolderPath="",string sn="")
         {
@@ -46,9 +46,14 @@ namespace Report
             certificate.Description = GetAllRanges(mainCsvInputs);
             string filePath = $"{Path.GetDirectoryName(mainCsvPaths[0])}\\Certificate_{sn}_{DateTime.Now.ToString("yyyyMMdd-HHmmss")}.xlsx";
             certificate.SaveToExcel(filePath);
-            
-            Helper.OpenFile(filePath);
+            if(word)
+            {
+                string filePathWord = $"{Path.GetDirectoryName(mainCsvPaths[0])}\\Certificate_{sn}_{DateTime.Now.ToString("yyyyMMdd-HHmmss")}.docx";
+                CertificateWordReport certificateWordReport = new CertificateWordReport(filePathWord, certificate);
+                certificateWordReport.SaveToWord();
+            }
 
+            Helper.OpenFile(filePath);
         }
 
         private static List<CertificateDataSet> GetSets(Dictionary<string,CSVInput> CsvInputs,bool asFound)

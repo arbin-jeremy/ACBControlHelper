@@ -51,7 +51,7 @@ namespace ACBControlHelper
 
         private void HandleEvent(object sender, MyEventArgs e)
         {
-            TextBox_SN.Text = e.Message;         
+            TextBox_SN.Text = e.Message;
         }
 
         private bool ContainsSixConsecutiveDigits(string str)
@@ -76,18 +76,21 @@ namespace ACBControlHelper
             string sn = TextBox_SN.Text;
             if (sn.Length > 5 && sn.Contains("ACB"))
             {
-               // RichTextBox_Customer.Text = arbin_production;
+                // RichTextBox_Customer.Text = arbin_production;
             }
             else if (ContainsSixConsecutiveDigits(sn))
             {
-               // RichTextBox_Customer.Text = "";
+                // RichTextBox_Customer.Text = "";
             }
             else
             {
-               // RichTextBox_Customer.Text = arbin_stock;
+                // RichTextBox_Customer.Text = arbin_stock;
             }
         }
 
-  
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            API.word = wordCheckBox.Checked;
+        }
     }
 }

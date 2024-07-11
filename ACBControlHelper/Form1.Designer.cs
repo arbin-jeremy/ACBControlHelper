@@ -37,6 +37,7 @@
             label4 = new Label();
             SelectCsvs_Main = new UserControl_chooseFile();
             SelectCsvs_Verfication = new UserControl_chooseFile();
+            wordCheckBox = new CheckBox();
             SuspendLayout();
             // 
             // ButtonCertificate
@@ -115,11 +116,23 @@
             SelectCsvs_Verfication.Size = new Size(573, 442);
             SelectCsvs_Verfication.TabIndex = 10;
             // 
+            // wordCheckBox
+            // 
+            wordCheckBox.AutoSize = true;
+            wordCheckBox.Location = new Point(921, 566);
+            wordCheckBox.Name = "wordCheckBox";
+            wordCheckBox.Size = new Size(233, 19);
+            wordCheckBox.TabIndex = 11;
+            wordCheckBox.Text = "Generate Additional Certificate in Word";
+            wordCheckBox.UseVisualStyleBackColor = true;
+            wordCheckBox.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1295, 608);
+            Controls.Add(wordCheckBox);
             Controls.Add(SelectCsvs_Verfication);
             Controls.Add(SelectCsvs_Main);
             Controls.Add(label4);
@@ -147,5 +160,6 @@
         private Label label4;
         private UserControl_chooseFile SelectCsvs_Main;
         private UserControl_chooseFile SelectCsvs_Verfication;
+        private CheckBox wordCheckBox;
     }
 }
